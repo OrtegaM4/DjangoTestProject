@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+{% extends "test_app/base.html" %}
+  {% block body_block %}
+    <h1>Welcome to Other </h1>
+    <h1>This is template inherited</h1>
+   <h1>{{text|upper}} </h1>
+   <h1>{{number|add:'99'}} </h1>
+    {% endblock %}
