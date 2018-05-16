@@ -1,0 +1,10 @@
+{% extends 'test_app/base.html' %}
+{% block body_block %}
+
+<h1>Welcome to the School Update page</h1>
+<form method="post"> {%csrf_token%}
+  {{ form.as_p }}
+  <input type="submit" name="" value="Update">
+
+</form>
+{% endblock %}

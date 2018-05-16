@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from test_app.views import IndexView
 from test_app import views
+from django.urls import path
+
 
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    path('', IndexView.as_view(), name = 'index'),
     url(r'^admin/', admin.site.urls),
     url(r'test_app/',include('test_app.urls')),
     #url(r'^formpage/',views.form_name_view, name='form_name'),

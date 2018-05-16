@@ -1,18 +1,58 @@
 from django.shortcuts import render
-from test_app.models import UserProfileInfo #Webpage,AccessRecord,Topic
+from . import models
 from test_app.forms import UserForm,UserProfileInfoForm
-
+from django.views.generic import (View, TemplateView, ListView, DetailView,
+                                 CreateView, UpdateView, DeleteView, RedirectView)
 #Additional Imports:
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def index(request):
+#def index(request):
     #context_dict = {'text':'hello world','number':100}
-    return render(request,'test_app/index.html')
+    #return render(request,'test_app/index.html')
 
+class IndexView(TemplateView):
+    template_name = 'test_app/index.html'
+
+    def get_context_data(self, **kwargs):
+        context= super().get_context_data(**kwargs)
+        context['inject.me'] = 'BASIC INJECTION'
+        return context
+
+class SchoolListView(ListView):
+    # If you don't pass in this attribute,
+    # Django will auto create a context name
+    # for you with object_list!
+    # Default would be 'school_list'
+
+    # Example of making your own:
+     context_object_name = 'schools'
+     model = models.School
+
+class SchoolDetailView(DetailView):
+    model = models.School
+    template_name = 'test_app/school_detail.html'
+    context_object_name = 'school_detail'
+
+class SchoolCreateView(CreateView):
+    model = models.School
+    fields = ('name', 'location','principal')
+#
+class SchoolUpdateView(UpdateView):
+        fields = ['name','principal']
+        model = models.School
+        #template_name_suffix = '_update_form'
+
+class SchoolDeleteView(DeleteView):
+    model= models.School
+    success_url = reverse_lazy('test_app:list')
+
+
+
+#Register and Login/Logout Logic Below
 @login_required
 def user_logout(request):
     logout(request)

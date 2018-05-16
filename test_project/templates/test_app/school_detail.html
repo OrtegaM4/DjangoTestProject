@@ -1,0 +1,25 @@
+{% extends 'test_app/base.html' %}
+{% block body_block %}
+
+<h1>Welcome to the School details page</h1>
+<h2>School Details:</h2>
+<p>Name:      {{school_detail.name}}</p>
+<p>Principal: {{school_detail.principal}}</p>
+<p>Location:  {{school_detail.location}}</p>
+<h2>Students:</h2>
+
+{% for student in school_detail.students.all %}
+<p>{{student.name}} Who is {{student.age}} Years old.</p>
+
+{% endfor %}
+
+
+<div class="container">
+  <p><a class='btn btn-danger' href=   "">Delete</a>
+
+  <a class='btn btn-primary' href=  ' pk={{school_detail.pk}}'>Update</a></p>
+
+
+</div>
+
+{% endblock %}

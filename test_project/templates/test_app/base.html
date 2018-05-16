@@ -16,6 +16,7 @@
       <li><a class="navbar-brand" href="{% url 'index' %}">Home</a></li>
       <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
       <li><a class="navbar-link" href="{% url 'test_app:register' %}">Register Page</a></li>
+      <li><a class="navbar-link" href="{% url 'test_app:list' %}">Schools</a></li>
 
       {% if user.is_authenticated %}
       <li> <a class ="navbar-link" href="{% url 'logout'%}" >Logout</a></li>
